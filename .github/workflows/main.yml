@@ -42,7 +42,10 @@ jobs:
           RUBY_BUILD_CACHE_PATH: /tmp/ruby-build-cache
 
       - name: Setup Ruby Environment
-        run: echo 'export PATH=/opt/hostedtoolcache/Ruby/3.1.4/x64/bin:$PATH' >> $GITHUB_ENV
+        run: |
+          echo 'export PATH=/opt/hostedtoolcache/Ruby/3.1.4/x64/bin:$PATH' >> $GITHUB_ENV
+          echo 'export GEM_HOME=$HOME/.gem' >> $GITHUB_ENV
+          echo 'export PATH=$GEM_HOME/bin:$PATH' >> $GITHUB_ENV
 
       - name: Install Bundler
         run: gem install bundler:2.3.4
