@@ -38,8 +38,6 @@ jobs:
         run: |
           ruby-build 3.1.4 /opt/hostedtoolcache/Ruby/3.1.4/x64
           touch /opt/hostedtoolcache/Ruby/3.1.4/x64.complete
-        env:
-          RUBY_BUILD_CACHE_PATH: /tmp/ruby-build-cache
 
       - name: Setup Ruby Environment
         run: |
@@ -48,19 +46,22 @@ jobs:
           echo 'export PATH=$GEM_HOME/bin:$PATH' >> $GITHUB_ENV
 
       - name: Install Bundler
-        run: gem install bundler:2.3.4
+        run: |
+          gem install bundler:2.3.4
 
       - name: Install Dependencies
-        run: bundle install
+        run: |
+          bundle install
         env:
-          PATH: /opt/hostedtoolcache/Ruby/3.1.4/x64/bin:$PATH
+          PATH: ${{ env.PATH }}
 
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
 
       - name: Build with Jekyll
-        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        run: |
+          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
 
