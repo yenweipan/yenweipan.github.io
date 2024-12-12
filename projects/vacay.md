@@ -2,7 +2,7 @@
 layout: project
 type: project
 image: img/vacay/heatflux_square.png
-title: "Hearflux"
+title: "Heatflux"
 date: 2022
 published: true
 labels:
